@@ -258,6 +258,11 @@ if cat "$COMPOSER" | python -c 'import sys,json; sys.exit("compile" not in json.
     composer run-script --no-dev --no-interaction compile 2>&1 | indent
 fi
 
+
+status "Installing PhalconPHP"
+source $BP_DIR/bin/phalcon
+
+
 status "Preparing runtime environment..."
 
 # install this buildpack like a composer package
@@ -287,6 +292,8 @@ fi
 # reset COMPOSER for the platform install step
 COMPOSER_bak="$COMPOSER"
 export COMPOSER=composer.json
+
+
 
 status "Checking for additional extensions to install..."
 # special treatment for Blackfire; we enable it if we detect a server id and a server token for it
